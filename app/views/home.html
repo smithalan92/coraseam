@@ -2,21 +2,9 @@
     <div class="container home">
         <div class="uk-text-center uk-position-center">
             <img src="./images/logo_light.png" />
-            <h1>Need some help?</h1>
-            <h4 class="nomargin">Find a shelter in your area here</h4>
             <div class="uk-margin">
-                <ui-select id="selectLocation" ng-model="location.chosenLocation" theme="selectize" ng-disabled="!availableLocations" title="Choose a location">
-                    <ui-select-match placeholder="Select or search a location in the list...">{{$select.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="location in availableLocations | filter: $select.search">
-                        <span ng-bind-html="location.name | highlight: $select.search"></span>
-                    </ui-select-choices>
-                </ui-select>
-                <div class="text-center uk-margin-top" ng-if="!availableLocations">
-                    <span>Loading Locations  </span>
-                    <div class="white-spinner" uk-spinner></div>
-                </div>
-                <button class="uk-margin uk-button uk-button-primary" ng-if="location.chosenLocation" ng-disabled="!location.chosenLocation" ng-click="viewSheltersInLocation()">View Shelters In {{location.chosenLocation.name}}</button>
+                <a href="#!/source" class="uk-button uk-button-primary uk-button-large">Source Code</a>
+                <a href="#!/demos" class="uk-button uk-button-primary uk-button-large">Demo Videos</a>
             </div>
-        </div>
     </div>
 </div>

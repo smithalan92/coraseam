@@ -21,13 +21,13 @@ angular
             .when '/home',
                 title: 'Home'
                 templateUrl: 'views/home.html'
-                controller: 'HomeCtrl'
             .when '/source',
                 title: 'Source Code'
-                templateUrl: 'views/sourcecode.html'
+                templateUrl: 'views/source-code.html'
             .when '/demos',
                 title: 'Demo Videos'
-                templateUrl: 'views/demovideos.html'
+                templateUrl: 'views/demo-videos.html'
+                controller: 'VideoCtrl'
             .otherwise
                 redirectTo: '/home'
 
@@ -37,7 +37,7 @@ angular
 
 angular
     #Define module and dependencies
-    .module 'corasEAMPublicApp'
+    .module 'corasEAMDemoApp'
     .run ['$rootScope' , ($rootScope) ->
         $rootScope.$on('$routeChangeSuccess', (event, current, previous) ->
             $rootScope.title = current.$$route.title;

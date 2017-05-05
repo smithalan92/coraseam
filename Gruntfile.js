@@ -41,10 +41,6 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/scripts/**/**/*.{coffee,litcoffee,coffee.md}'],
         tasks: ['newer:coffee:dist']
       },
-      coffeeTest: {
-        files: ['test/spec/{,*/,*/*/}*.{coffee,litcoffee,coffee.md}'],
-        tasks: ['newer:coffee:test', 'karma']
-      },
       styles: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'postcss']
@@ -177,24 +173,6 @@ module.exports = function (grunt) {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
         ignorePath:  /\.\.\//
-      },
-      test: {
-        devDependencies: true,
-        src: '<%= karma.unit.configFile %>',
-        ignorePath:  /\.\.\//,
-        fileTypes:{
-          coffee: {
-            block: /(([\s\t]*)#\s*?bower:\s*?(\S*))(\n|\r|.)*?(#\s*endbower)/gi,
-              detect: {
-                js: /'(.*\.js)'/gi,
-                coffee: /'(.*\.coffee)'/gi
-              },
-            replace: {
-              js: '\'{{filePath}}\'',
-              coffee: '\'{{filePath}}\''
-            }
-          }
-          }
       }
     },
 
@@ -340,7 +318,7 @@ module.exports = function (grunt) {
     ngtemplates: {
       dist: {
         options: {
-          module: 'corasEAMPublicApp',
+          module: 'corasEAMDemoApp',
           htmlmin: '<%= htmlmin.dist.options %>',
           usemin: 'scripts/scripts.js'
         },
@@ -422,14 +400,6 @@ module.exports = function (grunt) {
         'imagemin',
         'svgmin'
       ]
-    },
-
-    // Test settings
-    karma: {
-      unit: {
-        configFile: 'test/karma.conf.coffee',
-        singleRun: true
-      }
     }
   });
 
@@ -459,7 +429,6 @@ module.exports = function (grunt) {
     'concurrent:test',
     'postcss',
     'connect:test',
-    'karma'
   ]);
 
   grunt.registerTask('build', [
