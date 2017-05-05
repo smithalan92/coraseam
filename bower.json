@@ -1,0 +1,22 @@
+{
+  "name": "coraseam-demo-webapp",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular": "^1.4.0",
+    "angular-route": "^1.4.0",
+    "angular-bootstrap": "^1.2.1",
+    "angular-material": "^1.0.6",
+    "bootstrap": "3.3.7",
+  },
+  "appPath": "app",
+  "moduleName": "corasEAMDemoApp",
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
+  }
+}

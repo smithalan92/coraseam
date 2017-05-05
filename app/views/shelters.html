@@ -1,0 +1,87 @@
+<div class="fullbg shelter-fullbg">
+    <div class="text-center uk-position-center" ng-if="loading">
+        <h3>Loading Shelters...</h3>
+        <div class="white-spinner" uk-spinner></div>
+    </div>
+    <div class="text-center uk-position-center" ng-if="!loading && shelters.length === 0">
+        <h3>No Shelters Available...</h3>
+    </div>
+    <div class="container uk-position-center" ng-if="shelters.length < 3 && !loading">
+        <div class="col-md-6 uk-position-center" ng-if="shelters.length === 1">
+            <div class="uk-card fadein uk-card-secondary uk-card-body">
+                <h4 class="uk-card-title uk-text-center">{{shelters[0].name}}</h4>
+                <p><strong>Phone:</strong> {{shelters[0].phone}}</p>
+                <p><strong>Capacity:</strong> {{shelters[0].capacity}}</p>
+                <p><strong>Availability:</strong> <span ng-class="{red: isNearCapacity(shelters[0].capacity,shelters[0].availability)}"}> {{shelters[0].availability}}</span></p>
+                <button class="uk-button uk-button-primary" ng-click="viewShelterLocation(shelters[0])">View Location</button>
+                <div class="tooltip-wrapper" title="{{shelters[0].availability < 1 ? 'No spaces available' : 'Book Space'}}">
+                    <button class="uk-button button-blue" ng-disabled="shelters[0].availability < 1" ng-click="openReservationModal(shelters[0])">Book Space</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" ng-if="shelters.length === 2 && !loading">
+            <div class="uk-card fadein uk-card-secondary uk-card-body">
+                <h4 class="uk-card-title uk-text-center">{{shelters[0].name}}</h4>
+                <p><strong>Phone:</strong> {{shelters[0].phone}}</p>
+                <p><strong>Capacity:</strong> {{shelters[0].capacity}}</p>
+                <p><strong>Availability:</strong><span ng-class="{red: isNearCapacity(shelters[0].capacity,shelters[0].availability)}"}> {{shelters[0].availability}}</span></p>
+                <button class="uk-button uk-button-primary" ng-click="viewShelterLocation(shelters[0])">View Location</button>
+                <div class="tooltip-wrapper" title="{{shelters[0].availability < 1 ? 'No spaces available' : 'Book Space'}}">
+                    <button class="uk-button button-blue" ng-disabled="shelters[0].availability < 1" ng-click="openReservationModal(shelters[0])">Book Space</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" ng-if="shelters.length === 2 && !loading">
+            <div class="uk-card fadein uk-card-secondary uk-card-body">
+                <h4 class="uk-card-title uk-text-center">{{shelters[1].name}}</h4>
+                <p><strong>Phone:</strong> {{shelters[1].phone}}</p>
+                <p><strong>Capacity:</strong> {{shelters[1].capacity}}</p>
+                <p><strong>Availability:</strong> <span ng-class="{red: isNearCapacity(shelters[1].capacity,shelters[1].availability)}"> {{shelters[1].availability}}</span></p>
+                <button class="uk-button uk-button-primary" ng-click="viewShelterLocation(shelters[1])">View Location</button>
+                <div class="tooltip-wrapper" title="{{shelters[1].availability < 1 ? 'No spaces available' : 'Book Space'}}">
+                    <button class="uk-button button-blue" ng-disabled="shelters[1].availability < 1" ng-click="openReservationModal(shelters[1])">Book Space</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-class="{'uk-position-center': shelters.length < 4}" class="container" ng-if="shelters.length > 2 && !loading">
+        <div ng-repeat="shelter in shelters" ng-if="$index % 3 == 0" class="row uk-margin-top">
+            <div class="col-md-4">
+                <div class="uk-card fadein uk-card-secondary uk-card-body">
+                    <h4 class="uk-card-title uk-text-center">{{shelters[$index].name}}</h4>
+                    <p><strong>Phone:</strong> {{shelters[$index].phone}}</p>
+                    <p><strong>Capacity:</strong> {{shelters[$index].capacity}}</p>
+                    <p><strong>Availability:</strong><span ng-class="{red: isNearCapacity(shelters[$index].capacity,shelters[$index].availability)}"> {{shelters[$index].availability}}</span></p>
+                    <button class="uk-button uk-button-primary" ng-click="viewShelterLocation(shelters[$index])">View Location</button>
+                    <div class="tooltip-wrapper" title="{{shelters[$index].availability < 1 ? 'No spaces available' : 'Book Space'}}">
+                        <button class="uk-button button-blue" ng-disabled="shelters[$index].availability < 1" ng-click="openReservationModal(shelters[$index])">Book Space</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" ng-if="shelters.length > ($index + 1)">
+                <div class="uk-card fadein uk-card-secondary uk-card-body">
+                    <h4 class="uk-card-title uk-text-center">{{shelters[$index + 1].name}}</h4>
+                    <p><strong>Phone:</strong> {{shelters[$index + 1].phone}}</p>
+                    <p><strong>Capacity:</strong> {{shelters[$index + 1].capacity}}</p>
+                    <p><strong>Availability:</strong><span ng-class="{red: isNearCapacity(shelters[$index + 1].capacity,shelters[$index + 1].availability)}"> {{shelters[$index + 1].availability}}</span></p>
+                    <button class="uk-button uk-button-primary" ng-click="viewShelterLocation(shelters[$index + 1])">View Location</button>
+                    <div class="tooltip-wrapper" title="{{shelters[$index + 1].availability < 1 ? 'No spaces available' : 'Book Space'}}">
+                        <button class="uk-button button-blue" ng-disabled="shelters[$index + 1].availability < 1" ng-click="openReservationModal(shelters[$index + 1])">Book Space</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" ng-if="shelters.length > ($index + 2)">
+                <div class="uk-card fadein uk-card-secondary uk-card-body">
+                    <h4 class="uk-card-title uk-text-center">{{shelters[$index + 2].name}}</h4>
+                    <p><strong>Phone:</strong> {{shelters[$index + 2].phone}}</p>
+                    <p><strong>Capacity:</strong> {{shelters[$index + 2].capacity}}</p>
+                    <p><strong>Availability:</strong> <span ng-class="{red: isNearCapacity(shelters[$index + 2].capacity,shelters[$index + 2].availability)}"> {{shelters[$index + 2].availability}}</span></p>
+                    <button class="uk-button uk-button-primary" ng-click="viewShelterLocation(shelters[$index + 2])">View Location</button>
+                    <div class="tooltip-wrapper" title="{{shelters[$index + 2].availability < 1 ? 'No spaces available' : 'Book Space'}}">
+                        <button class="uk-button button-blue" ng-disabled="shelters[$index + 2].availability < 1" ng-click="openReservationModal(shelters[$index + 2])">Book Space</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
